@@ -28,7 +28,8 @@ cra() {
     create-react-app "$1" && cd "$1"
     mkdir src/components/App &&
     mv src/App.js src/App.css src/App.test.js src/components/App &&
-    sed -i '' 's;\./App;\./components/App;g' src/index.js &&
+    sed -i '' 's;\./App;\./components/App/App;g' src/index.js &&
+    sed -i '' 's;\./logo\.svg;\.\./\.\./logo\.svg;g' src/components/App/App.js
     if [ "$#" -eq  "2" ]; then
         git remote add origin "$2"
         git add .
@@ -38,7 +39,7 @@ cra() {
 }
 
 mkcmpnt() {
-    mkdir "src/$1" &&
+    command mkdir -v "src/$1" &&
     touch "src/$1/$1.js" && echo "Created new file src/$1/$1.js"
     touch "src/$1/$1.css" && echo "Created new file src/$1/$1.css"
 }
